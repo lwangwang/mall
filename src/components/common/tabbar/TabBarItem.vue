@@ -21,7 +21,7 @@ export default {
     },
     activeStyle(){
       // 传入的颜色 activeColor
-return this.isactive?{color:this.activeColor}:{}
+      return this.isactive?{color:this.activeColor}:{}
     }
   },
   props:{
