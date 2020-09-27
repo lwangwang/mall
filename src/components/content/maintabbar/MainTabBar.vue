@@ -44,5 +44,8 @@ export default {
 }
 </script>
 
-<style lang='stylus' scoped>
+<style scoped>
+.main-tab-bar{
+  padding-bottom: 49px;
+}
 </style>

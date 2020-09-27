@@ -32,9 +32,9 @@ export default {
 
 <style scoped>
  .mint-swipe {
- height: 195px;
+ height:170px;
  }
-.img{
+ .mint-swipe img{
   /* display: block; */
   width: 100%;
 
