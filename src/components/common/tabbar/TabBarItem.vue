@@ -35,7 +35,7 @@ export default {
   mounted () {},
   methods: {
     itemclick(){
-      this.$router.push(this.path)
+      this.$router.push(this.path, () => {})
     }
   }
 }
