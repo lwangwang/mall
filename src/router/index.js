@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+
+
+
 const Home = () =>
     import ('../views/home/Home.vue')
 const Category = () =>
@@ -20,22 +23,39 @@ const routes = [{
     redirect: '/home'
 }, {
     path: '/home',
+    meta: {
+        title: '首页'
+    },
     component: Home
 }, {
     path: '/category',
+    meta: {
+        title: '分类'
+    },
     component: Category
 }, {
     path: '/shopcart',
+    meta: {
+        title: '购物车'
+    },
     component: Shopcart
 }, {
     path: '/profile',
+    meta: {
+        title: '个人'
+    },
     component: Profile
 }]
 
 const router = new VueRouter({
-    mode: 'history',
-    base: process.env.BASE_URL,
-    routes
+        mode: 'history',
+        base: process.env.BASE_URL,
+        routes
+    })
+    // 前置钩子
+router.beforeEach((to, from, next) => {
+    // 从from跳转到to  meta元数据(描述数据的数据 )
+    document.title = to.matched[0].meta.title
+    next()
 })
-
 export default router

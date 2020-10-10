@@ -39,7 +39,6 @@ tabControl(index){
   height: 40px;
   line-height: 40px;
   font-size: 14px;
-  
 }
 .tab-control-item{
   flex: 1;
