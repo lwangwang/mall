@@ -12,7 +12,8 @@ const Shopcart = () =>
     import ('../views/shopcart/Shopcart.vue')
 const Profile = () =>
     import ('../views/category/Category.vue')
-
+const Detail = () =>
+    import ('../views/detail/Detail.vue')
 Vue.use(VueRouter)
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
@@ -40,12 +41,18 @@ const routes = [{
     },
     component: Shopcart
 }, {
-    path: '/profile',
+    path: '/profile/:id',
     meta: {
         title: '个人'
     },
     component: Profile
-}]
+}, {
+    path: '/detail/:id',
+    meta: {
+        title: '产品'
+    },
+    component: Detail
+}, ]
 
 const router = new VueRouter({
         mode: 'history',

@@ -6,7 +6,7 @@ export function request(config) {
             // 请求根路径
             baseURL: 'http://152.136.185.210:8000/api/w6',
             // 设置超时时间
-            timeout: 5000,
+            timeout: 10000,
         })
         //get请求 url查询对象  params:{id:12}
         // post请求  data:{}

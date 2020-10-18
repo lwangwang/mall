@@ -1,13 +1,14 @@
 <template>
   <div id="home">
     <nav-bar class="home-nav"><div slot="center">购物</div></nav-bar>
+    <tab-control @showTab="upDataShow" ref="tabControl1" v-show="tabshow" class="tabcontrol" :titles="['流行', '新款', '精致']" />
     <scroll class="content" ref="scroll" 
     :probe-type="3" :pull-up-load="true"
      @scroll="scrollContent" @pullingUp="loadMore" >
-    <swiper :banners="banners" />
+    <swiper :banners="banners" @swiperimgs="swiperimgload"/>
     <recommend :recommends="recommends" />
     <freature-view />
-    <tab-control @showTab="upDataShow" :titles="['流行', '新款', '精致']"></tab-control>
+    <tab-control @showTab="upDataShow" ref="tabControl2" :titles="['流行', '新款', '精致']"/>
     <goods-list :goods="goods[currentType].list"/>
     
     </scroll>
@@ -27,6 +28,8 @@ import BackTop from "components/content/backtop/BackTop"
 
 import { getHomeMultidata, getHomeGoods } from "network/home"
 
+import{ debounce } from "common/tool"
+
 import Recommend from "./childcomps/RecommendView"
 import FreatureView from "./childcomps/FreatureView"
 export default {
@@ -42,6 +45,10 @@ export default {
       },
       currentType:'pop' ,
       backtop:false,
+      tabshow:false,
+      taboffsetHeight:null,
+      // 储存浏览位置
+      savey:null,
     }
  
   },
@@ -63,19 +70,36 @@ export default {
    this.getHomeGoods('pop')
    this.getHomeGoods('new')
    this.getHomeGoods('sell')
-   this.$bus.on('itemImgLoad',()=>{
+ 
+  },
+  mounted() {
+  const refresh=debounce(this.$refs.scroll.refresh,500)
+   this.$bus.$on('itemImgLoad',()=>{
      /* better-scroll 初始化完成 但是图片都没有加载完 
-     导致滑动区域的高度不对。等图片加载完成后 refresh 重新计算滑动区域的高度。 */
-     this.$refs.Scroll.Scroll.refresh
+     导致滑动区域的高度不对。等图片加载完成后 refresh 重新计算滑动区域的高度*/
+     refresh()
    })
   },
-  mounted() {},
+  destroyed(){
+console.log('销毁');
+  },
+  activated(){
+    console.log('活跃');
+    this.$refs.scroll.scrollTo(0,this.savey)
+    this.$refs.scroll.refresh()
+    },
+  deactivated(){
+    console.log('不活跃');
+    this.savey=this.$refs.scroll.getscrolly()
+  },
   computed:{
     showData(){
       return this.goods[this.currentType].list
     }
   },
   methods: {
+ 
+    
     //网络请求信息 
     getHomeMultidata(){
        getHomeMultidata().then(res => {
@@ -83,9 +107,11 @@ export default {
       this.recommends = res.data.data.recommend.list
     })
     },
+    // 产品图片
     getHomeGoods(type){
       const page=this.goods[type].page+1
       getHomeGoods(type,page).then(res=>{
+        // console.log(res.data.data.list);
        this.goods[type].list.push(...res.data.data.list)
        this.goods[type].page+=1
       })
@@ -103,6 +129,8 @@ export default {
       this.currentType='sell'
       break;
 }
+this.$refs.tabControl1.currentIndex=index;
+this.$refs.tabControl2.currentIndex=index;
     },
   //  返回顶部
  backClick(){
@@ -111,14 +139,21 @@ export default {
   // 回到顶部的显示隐藏
   scrollContent(position){
 this.backtop=(-position.y)>1000
-console.log(position);
+this.tabshow=(-position.y)>this.taboffsetHeight
+// console.log(this.tabshow);
  },
+// 下拉加载信息
  loadMore(){
-   console.log(11);
 this.getHomeGoods(this.currentType)
- }
+ },
+ // TabContent吸顶效果
+ swiperimgload(){
+// console.log(this.$refs.tabControl2.$el.offsetTop);
+this.taboffsetHeight=this.$refs.tabControl2.$el.offsetTop
+// console.log(this.taboffsetHeight);
+    },
   },
- 
+
 };
 </script>
 
@@ -130,28 +165,26 @@ this.getHomeGoods(this.currentType)
 .home-nav {
   background-color: var(--color-tint);
   color: #fff;
-  position: fixed;
+  /* position: fixed;
   left: 0;
   top: 0;
   right: 0;
-  z-index: 999;
+  z-index: 999; */
 }
-.tab-control {
-  position: sticky;
-  top: 40px;
-  background-color: #fff;
-    z-index: 999;
+.tabcontrol {
+  position: relative;
+  background-color:#fff;
+  z-index: 9;
 }
-/* .content{
-position: absolute;
-top: 44px;
-bottom: 49px;
-left:0;
-right:0;
-} */
+
+/* 滚动内容 */
 .content{
-  /* overflow: hidden; */
-  height: calc(100% - 93px);
-  margin-top: 44px;
+  overflow: hidden;
+  /* height: calc(100% - 93px); */
+  position: absolute;
+  top: 44px;
+  bottom: 49px;
+  left: 0;
+  right: 0;
 }
 </style>

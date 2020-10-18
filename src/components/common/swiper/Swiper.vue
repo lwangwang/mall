@@ -3,7 +3,7 @@
 <mt-swipe :auto="4000">
   <mt-swipe-item v-for="item in banners" :key="item.id">
     <a :href="item.link">
-   <img  :src="item.image"  :alt="item.title"/>  
+   <img  :src="item.image"  :alt="item.title" @load="swiperimg"/>  
    </a>
   </mt-swipe-item>
 </mt-swipe>
@@ -26,7 +26,11 @@ export default {
   'mt-swipe-item': SwipeItem
   },
   mounted () {},
-  methods: {}
+  methods: {
+    swiperimg(){
+      this.$emit('swiperimgs')
+    }
+  }
 }
 </script>
 

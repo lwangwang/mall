@@ -1,5 +1,5 @@
 <template>
-  <div class="good-list-item">
+  <div class="good-list-item" @click="itemClick">
     <img :src="goodslist.show.img" alt="" @load="imgLoad">
     <div class="goods-info">
       <p>{{goodslist.title}}</p>
@@ -30,6 +30,10 @@ goodslist:{
   methods: {
 imgLoad(){
   this.$bus.$emit('itemImgLoad')
+},
+itemClick(){
+  console.log('点击跳转');
+this.$router.push('/detail/'+this.goodslist.iid)
 }
   }
 }

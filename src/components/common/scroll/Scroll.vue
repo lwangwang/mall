@@ -50,6 +50,7 @@ export default {
       // 监听滚动位置
       this.scroll.on("scroll", (position) => {
         this.$emit("scroll", position);
+        // console.log(this.scroll);
       });
       /* beforeScrollStart - 滚动开始之前触发
        scrollStart - 滚动开始时触发
@@ -69,8 +70,15 @@ export default {
   },
   methods: {
     scrollTo(x, y, time = 300) {
-      this.scroll.scrollTo(x, y, time);
+     this.scroll && this.scroll.scrollTo(x, y, time);
     },
+    refresh(){
+      // console.log('加载');
+      this.scroll && this.scroll.refresh()
+    },
+    getscrolly(){
+      return this.scroll?this.scroll.scrolly:0
+    }
   },
 };
 </script>
