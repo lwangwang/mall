@@ -1,7 +1,7 @@
 <template>
   <div id="detail">
-    <detail-nav-bar />
-    <scroll class="content" :pull-up-load="true" ref="scroll" @scroll="scrollContent">
+    <detail-nav-bar  @btnclick="btnchildclick"/>
+    <scroll class="content" :pull-up-load="true" ref="scroll1" @scroll="scrollContent">
       <detail-swiper :topImg="topImg" />
       <detail-info :goods="goods" />
       <detail-shop :shopinfo="shopinfo" />
@@ -82,7 +82,7 @@ export default {
         // 店铺信息
         this.shopinfo = new ShopInfo(res.data.result.shopInfo);
         // 产品详情页信息
-        console.log(res.data.result);
+        // console.log(res.data.result);
         this.detailinfo=res.data.result.detailInfo
          // 产品详情页的参数信息
         this.detailparams=res.data.result.itemParams
@@ -91,8 +91,9 @@ export default {
       });
   },
   mounted() {
-     const refresh=debounce(this.$refs.scroll.refresh,500)
-   this.$bus.$on('itemImgLoad',()=>{
+ 
+    const refresh=debounce(this.$refs.scroll1.refresh,500)
+    this.$bus.$on('itemImgLoad2',()=>{
      /* better-scroll 初始化完成 但是图片都没有加载完 
      导致滑动区域的高度不对。等图片加载完成后 refresh 重新计算滑动区域的高度*/
      refresh()
@@ -104,11 +105,27 @@ export default {
     },
      //  返回顶部
  backClick(){
-    this.$refs.scroll.scrollTo(0,0,500)
+    this.$refs.scroll1.scrollTo(0,0,500)
   },
    scrollContent(position){
 this.backtop=(-position.y)>1000
  },
+ btnchildclick(index){
+     switch(index){
+    case 0:
+      this.$refs.scroll1.scrollTo(0,-500,500)
+      break;
+    case 1:
+     this.$refs.scroll1.scrollTo(0,-1000,500)
+      break;
+    case 2:
+     this.$refs.scroll1.scrollTo(0,-1500,500)
+      break;
+    case 3:
+      this.$refs.scroll1.scrollTo(0,-2000,500)
+      break;
+}
+ }
   },
 };
 </script>

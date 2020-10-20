@@ -1,43 +1,46 @@
 <template>
   <div id="categorylist">
-    <ul v-for="item in info" class="">
-      <li class="categoryitem"><a :href="item.link"><img :src="item.image" alt=""><span>{{item.title}}</span></a></li>
+    <ul  class="" >
+      <li class="categoryitem" v-for="item in info" :key="item.id">
+        <a :href="item.link">
+          <img :src="item.image" alt="分类产品" /><span>{{ item.title }}</span></a>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  name: '',
-  props:{
-    info:{
-      type:Object,
-      default(){
-        return{}
-      }
-    }
+  name: "",
+  props: {
+    info: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
   },
-  data () {
-    return {
-      
-    };
+  data() {
+    return {};
   },
   components: {},
-  mounted () {},
-  methods: {}
-}
+  mounted() {},
+  methods: {},
+};
 </script>
 
 <style  scoped>
-#categorylist{
-  display:flex;
-  width: 100%;
-  text-align: center;
-  font-size: 12px;
-  padding: 10px 0 20px;
-  border-bottom: 8px solid #eee;
+#categorylist {
+ margin: 19px 7px 0;
+ display: block;
 }
-.categoryitem{
-  width:33.3%
+#categorylist ul{
+  width:100%;
+  display: block;
+}
+.categoryitem {
+  float: left;
+  text-align: center;
+  width: 32.8%;
 }
 </style>

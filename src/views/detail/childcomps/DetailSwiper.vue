@@ -35,7 +35,6 @@ height:375px;
     text-align: center;
   }
 .my-swipe .van-swipe-item img{
-  height: 100%;
   width: 100%;
   display: inline-block;
 } 

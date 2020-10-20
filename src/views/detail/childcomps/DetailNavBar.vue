@@ -33,7 +33,7 @@ export default {
   methods: {
     clickItem(index){
       this.currentIndex=index
-      this.$emit('btnclick',this.currentIndex)
+      this.$emit('btnclick',index)
   
     },
     clickBack(){

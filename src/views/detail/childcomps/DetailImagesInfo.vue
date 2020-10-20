@@ -8,7 +8,7 @@
 
       <div class="info-key" v-if="Object.keys(detailinfo).length!==0">{{detailinfo.detailImage[0].key}}</div>
       <div class="info-list"  v-if="Object.keys(detailinfo).length!==0">
-        <img v-for="(item,index) in detailinfo.detailImage[0].list" :key="index" :src="item" alt="">
+        <img v-for="(item,index) in detailinfo.detailImage[0].list" :key="index" :src="item" alt="" @load="imgLoad1">
       </div>
  
   </div>
@@ -33,7 +33,11 @@ export default {
   },
   components: {},
   mounted () {},
-  methods: {}
+  methods: {
+    imgLoad1(){
+  this.$bus.$emit('itemImgLoad2')
+},
+  }
 }
 </script>
 

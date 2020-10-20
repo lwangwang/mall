@@ -73,6 +73,7 @@ export default {
  
   },
   mounted() {
+    // 防抖
   const refresh=debounce(this.$refs.scroll.refresh,500)
    this.$bus.$on('itemImgLoad',()=>{
      /* better-scroll 初始化完成 但是图片都没有加载完 
@@ -180,10 +181,10 @@ this.taboffsetHeight=this.$refs.tabControl2.$el.offsetTop
 /* 滚动内容 */
 .content{
   overflow: hidden;
-  /* height: calc(100% - 93px); */
+  height: calc(100% - 93px);
   position: absolute;
   top: 44px;
-  bottom: 49px;
+  /* bottom: 49px; */
   left: 0;
   right: 0;
 }
