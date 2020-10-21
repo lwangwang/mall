@@ -132,13 +132,19 @@ this.backtop=(-position.y)>1000
 
 <style  scoped>
 #detail {
-  position: relative;
+  position: relative; 
   z-index: 9;
   background-color: #fff;
-  height: 100vh;
+  height: calc(100vh - 50px);
 }
 .content {
-  height: calc(100% - 94px);
+  /* height: calc(100% - 44px); */
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 44px;
+  bottom:0px;
 }
 
 </style>

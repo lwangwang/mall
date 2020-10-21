@@ -1,14 +1,18 @@
 <template>
   <div id="category">
+   <div class="rootlist">
       <van-sidebar v-model="activeKey">
-        <van-sidebar-item
-          :title="item.title"
-          v-for="(item, maitKey) in list"
-          :key="item.maitKey"
-          @click="itemclick"
-        />
-      </van-sidebar>
-      <category-list :props="info" />
+      <van-sidebar-item
+        :title="item.title" 
+        v-for="(item, maitKey) in list"
+        :key="item.maitKey"
+        @click="itemclick"
+      />
+    </van-sidebar>
+   </div>
+   <div class="itemcontent">
+    <category-list v-if="list.length" :info="info" />
+    </div>
   </div>
 </template>
 
@@ -21,35 +25,63 @@ export default {
     return {
       activeKey: 0,
       list: {},
-      info: {},
+      info: [],
     };
   },
   watch: {
-    activeKey(active) {},
+    activeKey(active) {
+// 数据变化之后才会监听到
+    },
   },
-  created() {
+async created() {
     // 分类左侧侧边栏
-    getCategory().then((res) => {
+   await getCategory().then((res) => {
       this.list = res.data.data.category.list;
-      console.log("左侧分类", this.list);
+      // console.log("左侧分类", this.list);
     });
-    //     getSubCategory(this.list[this.activeKey].maitKey).then(res=>{
-    // console.log(res)
-    //     })
+    await this.itemclick(this.activeKey)
   },
   components: { CategoryList },
-  mounted() {},
+  mounted() {
+
+  },
   methods: {
-    itemclick() {
-      getSubCategory(this.list[this.activeKey].maitKey).then((res) => {
+    itemclick(activeKey) {
+    //  console.log(activeKey);
+    let maitKey=this.list[this.activeKey].maitKey
+    // 向服务器发送请求获取分类信息
+      getSubCategory(maitKey).then((res) => {
         this.info = res.data.data.list;
         console.log("右侧内容", this.info);
       });
     },
+
   },
 };
 </script>
 
 <style scoped>
-
+#category .rootlist{
+  width: 30%;
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: auto; 
+}
+.van-sidebar {
+  padding-bottom: 50px;
+}
+.itemcontent{
+  overflow: hidden;
+  overflow-y: auto;
+  height: 100vh;
+  margin: 19px 7px 0;
+  width: 100%;
+  font-size: 12px; 
+}
+#category {
+  display: flex;
+}
+#categorylist {
+  flex: 1;
+}
 </style>

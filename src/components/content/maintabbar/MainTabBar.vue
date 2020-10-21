@@ -46,6 +46,6 @@ export default {
 
 <style scoped>
 .main-tab-bar{
-  padding-bottom: 49px;
+  /* padding-bottom: 49px; */
 }
 </style>

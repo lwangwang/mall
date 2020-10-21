@@ -9,5 +9,6 @@ export function getSubCategory(maitKey) {
     return request({
         url: '/subcategory',
         params: { maitKey }
+
     })
 }

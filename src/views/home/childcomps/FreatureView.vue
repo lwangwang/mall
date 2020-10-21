@@ -21,6 +21,9 @@ export default {
 </script>
 
 <style scoped>
+.freature a{
+  padding:0 0 0 0;
+}
 .freature img{
 width: 100%;
 }

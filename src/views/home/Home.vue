@@ -161,7 +161,7 @@ this.taboffsetHeight=this.$refs.tabControl2.$el.offsetTop
 <style  scoped>
 #home {
  position: relative;
-  height: 100vh;
+  height: calc(100vh - 49px);
 }
 .home-nav {
   background-color: var(--color-tint);
@@ -181,10 +181,10 @@ this.taboffsetHeight=this.$refs.tabControl2.$el.offsetTop
 /* 滚动内容 */
 .content{
   overflow: hidden;
-  height: calc(100% - 93px);
+  /* height: calc(100% - 93px); */
   position: absolute;
   top: 44px;
-  /* bottom: 49px; */
+  bottom: 0px;
   left: 0;
   right: 0;
 }

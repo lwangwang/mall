@@ -5,15 +5,15 @@ import VueRouter from 'vue-router'
 
 
 const Home = () =>
-    import ('../views/home/Home.vue')
+    import ('views/home/Home.vue')
 const Category = () =>
-    import ('../views/category/Category.vue')
+    import ('views/category/Category.vue')
 const Shopcart = () =>
-    import ('../views/shopcart/Shopcart.vue')
+    import ('views/shopcart/Shopcart.vue')
 const Profile = () =>
-    import ('../views/category/Category.vue')
+    import ('views/profile/Profile.vue')
 const Detail = () =>
-    import ('../views/detail/Detail.vue')
+    import ('views/detail/Detail.vue')
 Vue.use(VueRouter)
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
@@ -41,7 +41,7 @@ const routes = [{
     },
     component: Shopcart
 }, {
-    path: '/profile/:id',
+    path: '/profile',
     meta: {
         title: '个人'
     },
@@ -62,6 +62,7 @@ const router = new VueRouter({
     // 前置钩子
 router.beforeEach((to, from, next) => {
     // 从from跳转到to  meta元数据(描述数据的数据 )
+    console.log(to.matched[0].meta.title);
     document.title = to.matched[0].meta.title
     next()
 })

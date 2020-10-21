@@ -11,14 +11,16 @@ import {
     GoodsAction,
     GoodsActionIcon,
     GoodsActionButton,
-    Toast
+    Toast,
+    SubmitBar
 } from 'vant'
 Vue.use(Swipe)
 Vue.use(Toast)
 Vue.use(SwipeItem)
 Vue.use(Sidebar)
 Vue.use(SidebarItem)
-Vue.use(Lazyload)
+Vue.use(SubmitBar)
+Vue.use(Lazyload, { lazyComponent: true, })
 Vue.use(GoodsAction)
 Vue.use(GoodsActionIcon)
 Vue.use(GoodsActionButton)
