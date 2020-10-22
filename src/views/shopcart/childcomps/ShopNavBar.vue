@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav-bar>
-      <div slot="left" class="shopback">
+      <div slot="left" class="shopback" @click="clickback">
           <img src="~assets/img/common/back.svg" alt="">
       </div>
        <div slot="center" class="shopcar">
@@ -27,7 +27,12 @@ export default {
     NavBar
   },
   mounted () {},
-  methods: {}
+  methods: {
+    clickback(){
+      console.log(111);
+       this.$router.back()
+    }
+  }
 }
 </script>
 

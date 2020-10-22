@@ -31,13 +31,12 @@ export default {
 </script>
 
 <style  scoped>
-#categorylist {
 
-
-}
 #categorylist .categoryitem {
   width:100%;
   height: 100%;
+  overflow: hidden;
+  /* margin-bottom: 32px; */
   /* flex-wrap: wrap;
   display: flex;
 justify-content: space-around; */

@@ -86,6 +86,7 @@ export default {
         this.detailinfo=res.data.result.detailInfo
          // 产品详情页的参数信息
         this.detailparams=res.data.result.itemParams
+        console.log(res.data.result);
         // 产品评论信息
         // if(res.data.result.rate!==0)
       });

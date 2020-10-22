@@ -63,23 +63,26 @@ async created() {
 <style scoped>
 #category .rootlist{
   width: 30%;
-  height: 100vh;
   overflow: hidden;
   overflow-y: auto; 
+  /* height: 100vh; */
 }
 .van-sidebar {
-  padding-bottom: 50px;
+  padding-bottom: 32px;
 }
 .itemcontent{
   overflow: hidden;
   overflow-y: auto;
-  height: 100vh;
-  margin: 19px 7px 0;
+  /* height: 100vh; */
+  padding: 20px 7px 0;
   width: 100%;
   font-size: 12px; 
+  box-sizing: border-box;
 }
 #category {
   display: flex;
+ height: calc(100vh - 20px);
+/* height: 100vh; */
 }
 #categorylist {
   flex: 1;
